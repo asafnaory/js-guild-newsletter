@@ -1,0 +1,22 @@
+---
+import { getCollection } from "astro:content";
+import Card from "../Card/Card.astro";
+const newsletters = await getCollection("newsletter-sections");
+---
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="padding: 70px 0px 70px 20px; box-sizing: border-box;">
+  <tr>
+    <td style="box-sizing: border-box;">
+      {
+        newsletters.map(async (newslettersSection) => {
+          const { Content } = await newslettersSection.render();
+          return (
+            <Card title={newslettersSection.data.mainTitle} subtitle={newslettersSection.data.secondTitle}>
+              <Content />
+            </Card>
+          );
+        })
+      }
+    </td>
+  </tr>
+</table>

@@ -1,0 +1,39 @@
+---
+mainTitle: "JS Genius Corner"
+secondTitle: "Your Weekly Dose of JavaScript Wisdom"
+---
+Ever wondered why TypeScript has a never type? It turns out to be quite useful!
+
+The never type can help create exhaustive dependencies. For example:
+
+```typescript
+
+    type Shape = Circle | Square;
+
+    interface Circle {
+        kind: "circle";
+        radius: number;
+    }
+
+    interface Square {
+        kind: "square";
+        sideLength: number;
+    }
+
+    function calculateArea(shape: Shape): number | void {
+        if(shape.kind === 'circle'){
+            return Math.PI * shape.radius ** 2;
+        }
+        else if (shape.kind === 'square'){ 
+            return shape.sideLength ** 2;
+        }
+        else {
+            // Forces a TypeScript error if a new shape is added without updating this function 
+            const exhaustiveCheck: never = shape;
+            return exhaustiveCheck;
+        }
+    }
+
+```
+Now, if someone adds a new shape type to Shape, they'll encounter an error in the else clause, promoting comprehensive function updates.
+

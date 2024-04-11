@@ -1,0 +1,22 @@
+---
+import { getCollection } from "astro:content";
+
+const issueInfo = await getCollection("issue-info");
+const [info] = issueInfo;
+---
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="font-size: 14px; box-sizing: border-box;">
+  <tr>
+    <td style="padding: 20px 150px 0 20px; box-sizing: border-box;">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" style="box-sizing: border-box;">
+        <tr>
+          <td style="padding-right: 150px; box-sizing: border-box;">Issue #{info.data.issueNumber}</td>
+          <td align="right" style="padding-left: 20px; box-sizing: border-box;">{info.data.date}</td>
+        </tr>
+        <tr>
+          <td colspan="2" style="padding-top: 10px; box-sizing: border-box;">{info.data.text}</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
